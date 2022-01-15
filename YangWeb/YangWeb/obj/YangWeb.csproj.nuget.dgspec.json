@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\chris\\source\\repos\\YangWeb\\YangWeb\\YangWeb.csproj": {}
+    "C:\\Users\\chris\\Documents\\GitHub\\YangWeb\\YangWeb\\YangWeb\\YangWeb.csproj": {}
   },
   "projects": {
-    "C:\\Users\\chris\\source\\repos\\YangWeb\\YangWeb\\YangWeb.csproj": {
+    "C:\\Users\\chris\\Documents\\GitHub\\YangWeb\\YangWeb\\YangWeb\\YangWeb.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\chris\\source\\repos\\YangWeb\\YangWeb\\YangWeb.csproj",
+        "projectUniqueName": "C:\\Users\\chris\\Documents\\GitHub\\YangWeb\\YangWeb\\YangWeb\\YangWeb.csproj",
         "projectName": "YangWeb",
-        "projectPath": "C:\\Users\\chris\\source\\repos\\YangWeb\\YangWeb\\YangWeb.csproj",
+        "projectPath": "C:\\Users\\chris\\Documents\\GitHub\\YangWeb\\YangWeb\\YangWeb\\YangWeb.csproj",
         "packagesPath": "C:\\Users\\chris\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\chris\\source\\repos\\YangWeb\\YangWeb\\obj\\",
+        "outputPath": "C:\\Users\\chris\\Documents\\GitHub\\YangWeb\\YangWeb\\YangWeb\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\chris\\AppData\\Roaming\\NuGet\\NuGet.Config",

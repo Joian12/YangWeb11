@@ -2,7 +2,7 @@
 @using YangWeb.Services; 
 @{
     string userSession = UserSession.GetUserSession();
-    System.Diagnostics.Debug.WriteLine(userSession);
+    //System.Diagnostics.Debug.WriteLine(userSession);
     if (userSession != null)
         Layout = "_LayoutUser";
     else

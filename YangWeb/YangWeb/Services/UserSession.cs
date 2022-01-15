@@ -32,5 +32,10 @@ namespace YangWeb.Services
         {
             return _session.GetString("UserName");
         }
+
+        public static void LogoutSession()
+        {   
+            _session.Clear();
+        }
     }
 }
