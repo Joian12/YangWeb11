@@ -12,5 +12,6 @@ namespace YangWeb.Models
         public float Health { get; set; }
         public int Score { get; set; }
         public float Armor { get; set; }
+        public float Damage { get; set; }
     }
 }

@@ -1,4 +1,4 @@
-﻿@model YangWeb.Models.PlayerStatModel
+﻿@model YangWeb.Models.MultiplePassModel;
 @using YangWeb.Services;
 
 <div>
@@ -7,45 +7,60 @@
     <hr />
     <dl class="row">
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Level)
+            @Html.DisplayNameFor(model => model.PlayerStat.Level)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Level)
+            @Html.DisplayFor(model => model.PlayerStat.Level)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Experience)
+            @Html.DisplayNameFor(model => model.PlayerStat.Experience)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Experience)
+            @Html.DisplayFor(model => model.PlayerStat.Experience)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Health)
+            @Html.DisplayNameFor(model => model.PlayerStat.Health)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Health)
+            @Html.DisplayFor(model => model.PlayerStat.Health)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Score)
+            @Html.DisplayNameFor(model => model.PlayerStat.Score)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Score)
+            @Html.DisplayFor(model => model.PlayerStat.Score)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Armor)
+            @Html.DisplayNameFor(model => model.PlayerStat.Score)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Armor)
+            @Html.DisplayFor(model => model.PlayerStat.Score)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.PlayerStat.Damage)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.PlayerStat.Damage)
         </dd>
     </dl>
 </div>
 
 <form>
     <div>
-        @for (int i = 0; i < 15; i++)
+        @for (int i = 0; i < Model.AllAB.Count; i++)
         {
-            <button type="submit" value="@i" asp-controller="PlayerActivity" asp-action="ClickButtonAction">
+        <button type="submit" value="@i" name="buttonNum" asp-controller="PlayerActivity" asp-action="ClickButtonAction">
+            @if (!Model.AllAB[i].ButtonState)
+            {
                 <img src="~/Content/Card.jpg" alt="flip cards" width="120" height="150" />
-            </button>
+            }
+            else
+            {
+                 <img src="~/Content/Card.jpg" alt="flip cards" width="120" height="150" style="opacity: 0;" />   
+                 <h5>@Model.AllAB[i].Action</h5>
+            }
+
+        </button>
         }
 
     </div>

@@ -40,7 +40,7 @@ namespace YangWeb.Services
         public PlayerStatModel GetPlayerStats()
         {
             conn.Open();
-            MySqlCommand comm = new MySqlCommand("select Username, Level, Experience, Health, Score, Armor from usermodel where Username = '"+UserSession.GetUserSession()+"'", conn);
+            MySqlCommand comm = new MySqlCommand("select Username, Level, Experience, Health, Score, Armor, Damage from usermodel where Username = '"+UserSession.GetUserSession()+"'", conn);
             MySqlDataReader reader = comm.ExecuteReader();
 
             PlayerStatModel player = new PlayerStatModel();
@@ -53,6 +53,7 @@ namespace YangWeb.Services
                     player.Health = Convert.ToSingle(reader[3]);
                     player.Score = Convert.ToInt32(reader[4]); 
                     player.Armor = Convert.ToSingle(reader[5]);
+                    player.Damage = Convert.ToSingle(reader[6]);
                 }   
             }
             else
