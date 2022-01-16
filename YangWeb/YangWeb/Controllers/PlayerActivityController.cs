@@ -31,17 +31,30 @@ namespace YangWeb.Controllers
                     });
                 }
             }
-           
-            if(allEnemyStats.Count <= 0)
+
+            /*if(allEnemyStats.Count <= 0)
             {
-                for (int i = 0; i < 10; i++)
+                for (int i = 10; i > 0; i--)
                 {
                     allEnemyStats.Add(new EnemyStatsModel { 
                         EnemyName = "Monster "+i,
                         Health = 250*i,
-                        Damage = 55*i
+                        Damage = 55*i,
+                        isAlive = true,
+                        isAvailable = false
                     });
                 }
+            }*/
+            allEnemyStats.Add(new EnemyStatsModel { EnemyName = "Monster 1", Health = 250, Damage = 55, isAlive = true, isAvailable = false});
+            allEnemyStats.Add(new EnemyStatsModel { EnemyName = "Monster 2", Health = 250, Damage = 55, isAlive = true, isAvailable = false });
+            allEnemyStats.Add(new EnemyStatsModel { EnemyName = "Monster 3", Health = 250, Damage = 55, isAlive = true, isAvailable = false });
+            allEnemyStats.Add(new EnemyStatsModel { EnemyName = "Monster 4", Health = 0, Damage = 55, isAlive = true, isAvailable = false });
+            allEnemyStats.Add(new EnemyStatsModel { EnemyName = "Monster 5", Health = 0, Damage = 55, isAlive = true, isAvailable = false });
+
+            for (int i = 0; i < allEnemyStats.Count; i++)
+            {
+                if(allEnemyStats[i].Health > 0 )
+                    System.Diagnostics.Debug.WriteLine(allEnemyStats[i].EnemyName);
             }
   
             UserDataService userData = new UserDataService();
@@ -59,11 +72,12 @@ namespace YangWeb.Controllers
             
             for (int i = 0; i < allActionButtons.Count; i++)
             {
-                if (buttonNum == i)
+                if (buttonNum == i && allActionButtons[i].ButtonState == false)
                 {
                     allActionButtons[i].ButtonState = true;
                     int num = ran.Next(3);
-                    allActionButtons[i].Action = RandomActionMessage(num, userData.GetPlayerStats(), allEnemyStats[0]);
+                   
+                    allActionButtons[i].Action = RandomActionMessage(num, userData.GetPlayerStats(), GetMonster(allEnemyStats));
                     RandomAction(num, playerActivity, userData.GetPlayerStats());
                 }
             }
@@ -72,7 +86,7 @@ namespace YangWeb.Controllers
             mpass.AllAB = allActionButtons;
             mpass.PlayerStat = userData.GetPlayerStats();
 
-            System.Diagnostics.Debug.WriteLine(buttonNum);
+        
             return View("PlayerGame", mpass);
         }
 
@@ -103,6 +117,16 @@ namespace YangWeb.Controllers
                     //
                     break;
             }
+        }
+
+        public EnemyStatsModel GetMonster(List<EnemyStatsModel> allEnemy)
+        {
+            for (int i = 0; i < allEnemy.Count; i++)
+            {
+                if (allEnemy[i].Health > 0)
+                    return allEnemy[i];
+            }
+            return null;
         }
     }
 }

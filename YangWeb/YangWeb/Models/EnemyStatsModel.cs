@@ -11,5 +11,6 @@ namespace YangWeb.Models
         public int Health { get; set; }
         public float Damage { get; set; }
         public bool isAlive { get; set; }
+        public bool isAvailable { get; set;}
     }
 }

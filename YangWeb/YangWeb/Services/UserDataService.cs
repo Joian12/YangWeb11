@@ -63,5 +63,10 @@ namespace YangWeb.Services
             return player;
         }
 
+        public void SetPlayerStats()
+        {
+            
+        }
+
     }
 }
