@@ -1,0 +1,53 @@
+﻿@model YangWeb.Models.PlayerStatModel
+@using YangWeb.Services;
+
+<div>
+    <h4>@UserSession.GetUserSession()</h4>
+
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Level)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Level)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Experience)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Experience)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Health)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Health)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Score)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Score)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Armor)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Armor)
+        </dd>
+    </dl>
+</div>
+
+<form>
+    <div>
+        @for (int i = 0; i < 15; i++)
+        {
+            <button type="submit" value="@i" asp-controller="PlayerActivity" asp-action="ClickButtonAction">
+                <img src="~/Content/Card.jpg" alt="flip cards" width="120" height="150" />
+            </button>
+        }
+
+    </div>
+</form>
+
