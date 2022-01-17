@@ -28,10 +28,21 @@ namespace YangWeb.Services
             return playerStat.Level*playerStat.MaxExperience;
         }
 
-        public int CheckScore()
+        public int CheckScore(EnemyStatsModel enemy)
         {
-            return 0;
+            return enemy.Health <= 0 ? enemy.GivenScore : 0; ;
         }
+
+        public float CheckArmor(PlayerStatModel player)
+        {
+            return player.Armor + (player.Level / 10);
+        }
+
+        public float CheckDamage(PlayerStatModel player)
+        {
+            return player.Damage * (player.Level / 10);
+        }
+
         public float DamagePlayerHealth(float playerHealth, float damage, float armor)
         {
             return playerHealth - (damage - (armor * damage));

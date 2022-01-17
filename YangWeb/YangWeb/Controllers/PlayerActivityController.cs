@@ -42,14 +42,15 @@ namespace YangWeb.Controllers
                         Damage = 55*i,
                         isAlive = true,
                         GivenExperience = 35*i
+                        GivenScore = 200*i
                     });
                 }
             }*/
-            allEnemyStats.Add(new EnemyStatsModel { EnemyName = "Monster 1", Health = 250, Damage = 55, isAlive = true, GivenExperience = 65 });
-            allEnemyStats.Add(new EnemyStatsModel { EnemyName = "Monster 2", Health = 250, Damage = 55, isAlive = true, GivenExperience = 55 });
-            allEnemyStats.Add(new EnemyStatsModel { EnemyName = "Monster 3", Health = 250, Damage = 55, isAlive = true, GivenExperience = 45 });
-            allEnemyStats.Add(new EnemyStatsModel { EnemyName = "Monster 4", Health = 150, Damage = 55, isAlive = true, GivenExperience = 35 });
-            allEnemyStats.Add(new EnemyStatsModel { EnemyName = "Monster 5", Health = 100, Damage = 55, isAlive = true, GivenExperience = 25 });
+            allEnemyStats.Add(new EnemyStatsModel { EnemyName = "Monster 1", Health = 250, Damage = 55, isAlive = true, GivenExperience = 65, GivenScore = 100 });
+            allEnemyStats.Add(new EnemyStatsModel { EnemyName = "Monster 2", Health = 250, Damage = 55, isAlive = true, GivenExperience = 55, GivenScore = 80 });
+            allEnemyStats.Add(new EnemyStatsModel { EnemyName = "Monster 3", Health = 250, Damage = 55, isAlive = true, GivenExperience = 45, GivenScore = 60 });
+            allEnemyStats.Add(new EnemyStatsModel { EnemyName = "Monster 4", Health = 150, Damage = 55, isAlive = true, GivenExperience = 35, GivenScore = 40 });
+            allEnemyStats.Add(new EnemyStatsModel { EnemyName = "Monster 5", Health = 100, Damage = 55, isAlive = true, GivenExperience = 25, GivenScore = 20 });
 
             for (int i = 0; i < allEnemyStats.Count; i++)
             {
@@ -87,8 +88,10 @@ namespace YangWeb.Controllers
             mpass.AllAB = allActionButtons;
             mpass.PlayerStat = userData.GetPlayerStats();
 
-        
-            return View("PlayerGame", mpass);
+            if (userData.GetPlayerStats().Health <= 0)
+                return View("YouLose");
+            else
+                return View("PlayerGame", mpass);
         }
 
         public string RandomActionMessage(int num, PlayerStatModel playerStat, EnemyStatsModel enemyStats)
@@ -117,12 +120,17 @@ namespace YangWeb.Controllers
 
                     break;
                 case 1:
+                    enemy.Health = activity.DamagePlayerHealth(playerStats.Health, enemy.Damage, playerStats.Armor);
                     playerStats.Level = activity.CheckLevel(playerStats);
                     playerStats.MaxExperience = activity.CheckMaxExperience(playerStats);
                     playerStats.CurrentExperience = activity.CheckCurrentExperience(enemy);
-                    enemy.Health = activity.DamagePlayerHealth(playerStats.Health, enemy.Damage, playerStats.Armor);
+                    playerStats.Score = activity.CheckScore(enemy);
+                    playerStats.Armor = activity.CheckArmor(playerStats);
+                    playerStats.Damage = activity.CheckDamage(playerStats);
                     break;
             }
+
+            userData.SetPlayerStats(playerStats);
         }
 
         public EnemyStatsModel GetMonster(List<EnemyStatsModel> allEnemy)
