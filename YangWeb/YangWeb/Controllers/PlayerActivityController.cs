@@ -39,12 +39,15 @@ namespace YangWeb.Controllers
             currentEnemy = GetMonster(allEnemyStats);
 
             UserDataService userData = new UserDataService();
+
+            ResetAfterDeath(userData);
+
             MultiplePassModel mpass = new MultiplePassModel();
             mpass.AllAB = allActionButtons;
             mpass.PlayerStat = userData.GetPlayerStats();
             mpass.EnemyStats = currentEnemy;
 
-            ResetAfterDeath(userData);
+            
 
             return View(mpass);
         }
@@ -192,7 +195,17 @@ namespace YangWeb.Controllers
 
         public void ResetAfterDeath(UserDataService userData)
         {
+            PlayerStatModel newPlay = new PlayerStatModel(); 
+            newPlay.Level = 1;
+            newPlay.MaxExperience = 150;
+            newPlay.CurrentExperience = 0;
+            newPlay.Health = 250;
+            newPlay.Armor = 1;
+            newPlay.Score = 0;
+            newPlay.Damage = 55;
 
+
+            userData.SetPlayerStats(newPlay);
         }
     }
 }

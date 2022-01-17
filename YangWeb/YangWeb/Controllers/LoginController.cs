@@ -13,15 +13,20 @@ namespace YangWeb.Controllers
     {   
         public IActionResult Index(UserModel user)
         {
-            UserDataService tryService = new UserDataService();
             return View();
         }
 
-        public IActionResult SuccessLogin(UserModel user)
+        public IActionResult Login(UserModel user)
         {
-            UserSession.SetUserSession(user.Username);
-            System.Diagnostics.Debug.WriteLine(UserSession.GetUserSession());
-            return View("Views/Home/Index.cshtml");
+            UserDataService userData = new UserDataService();
+            if (userData.CheckLogin(user))
+            {
+                UserSession.SetUserSession(user.Username);
+                return View("Views/Home/Index.cshtml");
+            }
+            else
+                return View("Index");
+            
         }
     }
 }

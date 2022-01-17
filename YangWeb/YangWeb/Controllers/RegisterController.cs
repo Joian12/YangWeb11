@@ -19,7 +19,7 @@ namespace YangWeb.Controllers
         {
             UserDataService userData = new UserDataService();
             userData.RegisterUser(user);
-            return View("Views/Login/Index.cshtml");
+            return RedirectToAction("Login", "Login");
         }
     }
 }

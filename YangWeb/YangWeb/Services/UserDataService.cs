@@ -20,7 +20,7 @@ namespace YangWeb.Services
         {
             conn.Open();
             MySqlCommand commm = new MySqlCommand("insert into usermodel (Username, Password, Level, MaxExperience, CurrentExperience, Health, " +
-                "Score, Armor) values ('"+user.Username+"' , '"+user.Password+"', 1, 150, 0, 250, 0, 1, 55)", conn);
+                "Score, Armor, Damage) values ('"+user.Username+"' , '"+user.Password+"', 1, 150, 0, 250, 0, 1, 55)", conn);
             
 
             commm.ExecuteNonQuery();
@@ -79,6 +79,19 @@ namespace YangWeb.Services
             command.ExecuteNonQuery();
             command.Dispose();
             conn.Close();
+        }
+
+        public bool CheckLogin(UserModel user)
+        {
+            bool isValid = false;
+            conn.Open();
+            MySqlCommand command = new MySqlCommand("select * from usermodel where Username = '"+user.Username+"' and Password = '"+user.Password+"'", conn);
+            MySqlDataReader reader = command.ExecuteReader();
+            isValid = reader.HasRows ? true : false;
+            command.Dispose();
+            conn.Close();
+           
+            return isValid;
         }
 
     }
