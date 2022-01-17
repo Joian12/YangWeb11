@@ -6,17 +6,26 @@
 
     <hr />
     <dl class="row">
-        <dt class="col-sm-2">
+        <dt class="col-sm-1">
             @Html.DisplayNameFor(model => model.PlayerStat.Level)
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.PlayerStat.Level)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.PlayerStat.Experience)
+            @Html.DisplayNameFor(model => model.PlayerStat.CurrentExperience)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.PlayerStat.Experience)
+            @Html.DisplayFor(model => model.PlayerStat.CurrentExperience)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.PlayerStat.Health)
+        </dt>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.PlayerStat.MaxExperience)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.PlayerStat.MaxExperience)
         </dd>
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.PlayerStat.Health)

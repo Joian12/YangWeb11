@@ -19,8 +19,8 @@ namespace YangWeb.Services
         public void RegisterUser(UserModel user)
         {
             conn.Open();
-            MySqlCommand commm = new MySqlCommand("insert into usermodel (Username, Password, Level, Experience, Health, " +
-                "Score, Armor) values ('"+user.Username+"' , '"+user.Password+"', 1, 0, 250, 0, 1)", conn);
+            MySqlCommand commm = new MySqlCommand("insert into usermodel (Username, Password, Level, MaxExperience, CurrentExperience, Health, " +
+                "Score, Armor) values ('"+user.Username+"' , '"+user.Password+"', 1, 150, 0, 250, 0, 1)", conn);
             
 
             commm.ExecuteNonQuery();
@@ -40,7 +40,7 @@ namespace YangWeb.Services
         public PlayerStatModel GetPlayerStats()
         {
             conn.Open();
-            MySqlCommand comm = new MySqlCommand("select Username, Level, Experience, Health, Score, Armor, Damage from usermodel where Username = '"+UserSession.GetUserSession()+"'", conn);
+            MySqlCommand comm = new MySqlCommand("select Username, Level, MaxExperience, CurrentExperience, Health, Score, Armor, Damage from usermodel where Username = '"+UserSession.GetUserSession()+"'", conn);
             MySqlDataReader reader = comm.ExecuteReader();
 
             PlayerStatModel player = new PlayerStatModel();
@@ -49,11 +49,12 @@ namespace YangWeb.Services
                 while (reader.Read())
                 {
                     player.Level = Convert.ToInt32(reader[1]);
-                    player.Experience = Convert.ToSingle(reader[2]);
-                    player.Health = Convert.ToSingle(reader[3]);
-                    player.Score = Convert.ToInt32(reader[4]); 
-                    player.Armor = Convert.ToSingle(reader[5]);
-                    player.Damage = Convert.ToSingle(reader[6]);
+                    player.MaxExperience = Convert.ToSingle(reader[2]);
+                    player.CurrentExperience = Convert.ToSingle(reader[3]);
+                    player.Health = Convert.ToSingle(reader[4]);
+                    player.Score = Convert.ToInt32(reader[5]); 
+                    player.Armor = Convert.ToSingle(reader[6]);
+                    player.Damage = Convert.ToSingle(reader[7]);
                 }   
             }
             else
@@ -63,9 +64,21 @@ namespace YangWeb.Services
             return player;
         }
 
-        public void SetPlayerStats()
+        public void SetPlayerStats(PlayerStatModel player)
         {
-            
+            conn.Open();
+            MySqlCommand command = new MySqlCommand("update usermodel " +
+                "set Level; = '"+player.Level+"'," +
+                    "MaxExperience = '"+player.MaxExperience+"'," +
+                    "CurrentExperience = '" + player.CurrentExperience + "'," +
+                    "Health = '" +player.Health+"'," +
+                    "Score = '"+player.Score+"'," +
+                    "Armor = '"+player.Armor+"'," +
+                    "Damage = '"+player.Damage+"' where = '"+UserSession.GetUserSession()+"'; ",conn);
+
+            command.ExecuteNonQuery();
+            command.Dispose();
+            conn.Close();
         }
 
     }
