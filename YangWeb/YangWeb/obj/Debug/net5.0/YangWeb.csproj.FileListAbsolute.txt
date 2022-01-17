@@ -277,3 +277,4 @@ C:\Users\chris\Documents\GitHub\YangWeb\YangWeb\YangWeb\obj\Debug\net5.0\ref\Yan
 C:\Users\chris\Documents\GitHub\YangWeb\YangWeb\YangWeb\obj\Debug\net5.0\YangWeb.pdb
 C:\Users\chris\Documents\GitHub\YangWeb\YangWeb\YangWeb\obj\Debug\net5.0\YangWeb.genruntimeconfig.cache
 C:\Users\chris\Documents\GitHub\YangWeb\YangWeb\YangWeb\obj\Debug\net5.0\Razor\Views\PlayerActivity\PlayerGame.cshtml.g.cs
+C:\Users\chris\Documents\GitHub\YangWeb\YangWeb\YangWeb\obj\Debug\net5.0\Razor\Views\PlayerActivity\YouLoser.cshtml.g.cs

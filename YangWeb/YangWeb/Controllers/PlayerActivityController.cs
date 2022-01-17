@@ -52,11 +52,11 @@ namespace YangWeb.Controllers
             allEnemyStats.Add(new EnemyStatsModel { EnemyName = "Monster 4", Health = 150, Damage = 55, isAlive = true, GivenExperience = 35, GivenScore = 40 });
             allEnemyStats.Add(new EnemyStatsModel { EnemyName = "Monster 5", Health = 100, Damage = 55, isAlive = true, GivenExperience = 25, GivenScore = 20 });
 
-            for (int i = 0; i < allEnemyStats.Count; i++)
+            /*for (int i = 0; i < allEnemyStats.Count; i++)
             {
                 if(allEnemyStats[i].Health > 0 )
                     System.Diagnostics.Debug.WriteLine(allEnemyStats[i].EnemyName);
-            }
+            }*/
   
             UserDataService userData = new UserDataService();
             MultiplePassModel mpass = new MultiplePassModel();
@@ -76,20 +76,21 @@ namespace YangWeb.Controllers
                 if (buttonNum == i && allActionButtons[i].ButtonState == false)
                 {
                     allActionButtons[i].ButtonState = true;
-                    int num = ran.Next(3);
-                   
+                    int num = ran.Next(2);
+                    System.Diagnostics.Debug.WriteLine(num);
                     allActionButtons[i].Action = RandomActionMessage(num, userData.GetPlayerStats(), GetMonster(allEnemyStats));
                     RandomAction(num, playerActivity, userData.GetPlayerStats(), GetMonster(allEnemyStats), userData);
-
+                    
                 }
             }
 
             MultiplePassModel mpass = new MultiplePassModel();
             mpass.AllAB = allActionButtons;
             mpass.PlayerStat = userData.GetPlayerStats();
-
+            
+           
             if (userData.GetPlayerStats().Health <= 0)
-                return View("YouLose");
+                return View("YouLoser");
             else
                 return View("PlayerGame", mpass);
         }
@@ -112,25 +113,41 @@ namespace YangWeb.Controllers
 
         public void RandomAction(int num, PlayerActivityServices activity, PlayerStatModel playerStats, EnemyStatsModel enemy, UserDataService userData)
         {
+            
+            PlayerStatModel player = new PlayerStatModel();
             switch (num)
             {
                 case 0:
-                    
-                    playerStats.Health = activity.DamageEnemyHealth(enemy.Health, playerStats.Damage);
-
+                     enemy.Health = activity.DamageEnemyHealth(enemy.Health, playerStats.Damage);
+                     player.Health = playerStats.Health;
+                     player.Level = playerStats.Level;
+                     player.MaxExperience = playerStats.MaxExperience;
+                     player.CurrentExperience = playerStats.CurrentExperience;
+                     player.Score = playerStats.Score;
+                     player.Armor = playerStats.Armor;
+                     player.Damage = playerStats.Damage;
+                    /*System.Diagnostics.Debug.WriteLine("Enemy Health 1: " + (enemy.Health + activity.DamageEnemyHealth(enemy.Health, playerStats.Damage)));
+                    System.Diagnostics.Debug.WriteLine("Player Health 1: " + playerStats.Health);
+                    System.Diagnostics.Debug.WriteLine("Player Damage 1: " + playerStats.Damage);*/
+                    userData.SetPlayerStats(player);
                     break;
-                case 1:
-                    enemy.Health = activity.DamagePlayerHealth(playerStats.Health, enemy.Damage, playerStats.Armor);
-                    playerStats.Level = activity.CheckLevel(playerStats);
-                    playerStats.MaxExperience = activity.CheckMaxExperience(playerStats);
-                    playerStats.CurrentExperience = activity.CheckCurrentExperience(enemy);
-                    playerStats.Score = activity.CheckScore(enemy);
-                    playerStats.Armor = activity.CheckArmor(playerStats);
-                    playerStats.Damage = activity.CheckDamage(playerStats);
+                case 1:                    
+                    player.Health = playerStats.Health - activity.DamagePlayerHealth( enemy.Damage);
+                    player.Level = playerStats.Level + activity.CheckLevel(playerStats);
+                    player.MaxExperience = playerStats.MaxExperience + activity.CheckMaxExperience(playerStats);
+                    player.CurrentExperience = playerStats.CurrentExperience + activity.CheckCurrentExperience(enemy);
+                    player.Score = playerStats.Score + activity.CheckScore(enemy);
+                    player.Armor = playerStats.Armor + activity.CheckArmor(playerStats);
+                    player.Damage = playerStats.Damage + activity.CheckDamage(playerStats);
+                   // System.Diagnostics.Debug.WriteLine("Player Health 2: " + playerStats.Health);
+                    /*System.Diagnostics.Debug.WriteLine("Player TakenDamage 2: " + activity.DamagePlayerHealth(enemy.Damage, playerStats.Armor));
+                    System.Diagnostics.Debug.WriteLine("Player Damage 2: " + playerStats.Damage);
+                    System.Diagnostics.Debug.WriteLine("Player Score 2: " + (player.Score + activity.CheckScore(enemy)));*/
+                    userData.SetPlayerStats(player);
                     break;
             }
 
-            userData.SetPlayerStats(playerStats);
+            
         }
 
         public EnemyStatsModel GetMonster(List<EnemyStatsModel> allEnemy)

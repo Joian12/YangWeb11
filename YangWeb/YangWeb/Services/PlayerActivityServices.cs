@@ -15,7 +15,7 @@ namespace YangWeb.Services
 
         public int CheckLevel(PlayerStatModel playerStat)
         {
-            return playerStat.CurrentExperience >= playerStat.MaxExperience ? playerStat.Level+1 : playerStat.Level;
+            return playerStat.CurrentExperience >= playerStat.MaxExperience ? 1 : 0;
         }
 
         public float CheckCurrentExperience(EnemyStatsModel enemy)
@@ -30,7 +30,7 @@ namespace YangWeb.Services
 
         public int CheckScore(EnemyStatsModel enemy)
         {
-            return enemy.Health <= 0 ? enemy.GivenScore : 0; ;
+            return enemy.Health <= 0 ? enemy.GivenScore : 0;
         }
 
         public float CheckArmor(PlayerStatModel player)
@@ -43,9 +43,9 @@ namespace YangWeb.Services
             return player.Damage * (player.Level / 10);
         }
 
-        public float DamagePlayerHealth(float playerHealth, float damage, float armor)
+        public float DamagePlayerHealth(float damage)
         {
-            return playerHealth - (damage - (armor * damage));
+            return damage;
         }
 
         public float DamageEnemyHealth(float enemyhealth, float playerDamage)

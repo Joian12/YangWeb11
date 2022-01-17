@@ -20,7 +20,7 @@ namespace YangWeb.Services
         {
             conn.Open();
             MySqlCommand commm = new MySqlCommand("insert into usermodel (Username, Password, Level, MaxExperience, CurrentExperience, Health, " +
-                "Score, Armor) values ('"+user.Username+"' , '"+user.Password+"', 1, 150, 0, 250, 0, 1)", conn);
+                "Score, Armor) values ('"+user.Username+"' , '"+user.Password+"', 1, 150, 0, 250, 0, 1, 55)", conn);
             
 
             commm.ExecuteNonQuery();
@@ -68,13 +68,13 @@ namespace YangWeb.Services
         {
             conn.Open();
             MySqlCommand command = new MySqlCommand("update usermodel " +
-                "set Level; = '"+player.Level+"'," +
+                "set Level = '"+player.Level+"'," +
                     "MaxExperience = '"+player.MaxExperience+"'," +
                     "CurrentExperience = '" + player.CurrentExperience + "'," +
                     "Health = '" +player.Health+"'," +
                     "Score = '"+player.Score+"'," +
                     "Armor = '"+player.Armor+"'," +
-                    "Damage = '"+player.Damage+"' where = '"+UserSession.GetUserSession()+"'; ",conn);
+                    "Damage = '"+player.Damage+ "' where  Username = '" + UserSession.GetUserSession()+"'; ",conn);
 
             command.ExecuteNonQuery();
             command.Dispose();
