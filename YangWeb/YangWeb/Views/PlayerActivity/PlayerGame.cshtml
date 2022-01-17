@@ -1,76 +1,106 @@
 ﻿@model YangWeb.Models.MultiplePassModel;
 @using YangWeb.Services;
 
-<div>
-    <h4>@UserSession.GetUserSession()</h4>
+<div class="row">
+    <div class="col-md-2">
+        <h4>@UserSession.GetUserSession()</h4>
 
-    <hr />
-    <dl class="row">
-        <dt class="col-sm-1">
-            @Html.DisplayNameFor(model => model.PlayerStat.Level)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.PlayerStat.Level)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.PlayerStat.CurrentExperience)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.PlayerStat.CurrentExperience)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.PlayerStat.Health)
-        </dt>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.PlayerStat.MaxExperience)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.PlayerStat.MaxExperience)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.PlayerStat.Health)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.PlayerStat.Health)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.PlayerStat.Score)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.PlayerStat.Score)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.PlayerStat.Score)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.PlayerStat.Score)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.PlayerStat.Damage)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.PlayerStat.Damage)
-        </dd>
-    </dl>
+        <hr />
+        <dl>
+            <dt >
+                @Html.DisplayNameFor(model => model.PlayerStat.Level)
+            </dt>
+            <dd >
+                @Html.DisplayFor(model => model.PlayerStat.Level)
+            </dd>
+            <dt >
+                @Html.DisplayNameFor(model => model.PlayerStat.CurrentExperience)
+            </dt>
+            <dd >
+                @Html.DisplayFor(model => model.PlayerStat.CurrentExperience)
+            </dd>
+            <dt >
+                @Html.DisplayNameFor(model => model.PlayerStat.MaxExperience)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.PlayerStat.MaxExperience)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.PlayerStat.Health)
+            </dt>
+            <dd >
+                @Html.DisplayFor(model => model.PlayerStat.Health)
+            </dd>
+            <dt >
+                @Html.DisplayNameFor(model => model.PlayerStat.Score)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.PlayerStat.Score)
+            </dd>
+            <dt >
+                @Html.DisplayNameFor(model => model.PlayerStat.Score)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.PlayerStat.Score)
+            </dd>
+            <dt >
+                @Html.DisplayNameFor(model => model.PlayerStat.Damage)
+            </dt>
+            <dd >
+                @Html.DisplayFor(model => model.PlayerStat.Damage)
+            </dd>
+        </dl>
+    </div>
+
+    <div class="col-md-8">
+        <form>
+            <div>
+                @for (int i = 0; i < Model.AllAB.Count; i++)
+                {
+                    <button type="submit" value="@i" name="buttonNum" asp-controller="PlayerActivity" asp-action="ClickButtonAction">
+                        @if (!Model.AllAB[i].ButtonState)
+                        {
+                            <img src="~/Content/Card.jpg" alt="flip cards" width="120" height="150" />
+                        }
+                        else
+                        {
+                            <p style="width:120px; height: 150px;">@Model.AllAB[i].Action</p>
+                        }
+
+                    </button>
+                }
+            </div>
+        </form>
+    </div>
+    <div class="col-md-2">
+        <h4>Enemy</h4>
+
+        <hr />
+        <dl>
+            <dt>
+                @Html.DisplayNameFor(model => model.EnemyStats.EnemyName)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.EnemyStats.EnemyName)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.EnemyStats.Health)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.EnemyStats.Health)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.EnemyStats.Damage)
+            </dt>
+            <dt>
+                @Html.DisplayFor(model => model.EnemyStats.Damage)
+            </dt>
+        </dl>
+    </div>
 </div>
 
-<form>
-    <div>
-        @for (int i = 0; i < Model.AllAB.Count; i++)
-        {
-        <button type="submit" value="@i" name="buttonNum" asp-controller="PlayerActivity" asp-action="ClickButtonAction">
-            @if (!Model.AllAB[i].ButtonState)
-            {
-                <img src="~/Content/Card.jpg" alt="flip cards" width="120" height="150" />
-            }
-            else
-            {
-                 <p style="width:120px; height: 150px;">@Model.AllAB[i].Action</p> 
-            }
 
-        </button>
-        }
 
-    </div>
-</form>
+
+
 

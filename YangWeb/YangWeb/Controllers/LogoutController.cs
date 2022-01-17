@@ -10,14 +10,20 @@ namespace YangWeb.Controllers
     public class LogoutController : Controller
     {
         public IActionResult Index()
-        {
+        {   
             return View("Views/Home/Index.cshtml");
         }
 
         public IActionResult LogOut()
         {
             UserSession.LogoutSession();
+            
             return View("Views/Home/Index.cshtml");
+        }
+
+        public ActionResult LogOut_()
+        {
+            return RedirectToAction("LogoutReset", "PlayerActivity");
         }
     }
 }
