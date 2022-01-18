@@ -48,17 +48,26 @@ namespace YangWeb.Controllers
             return View(mpass);
         }
 
-        public IActionResult ResetButton()
+        public IActionResult CheckAllScores()
         {
-            PlayerStatModel newPlayer = new PlayerStatModel();
-            MultiplePassModel mpass = new MultiplePassModel();
             UserDataService user = new UserDataService();
-         
-            newPlayer.Score = user.GetPlayerStats().Score;
-            mpass.AllAB = RestartButtons();
-            mpass.PlayerStat = newPlayer;
-            RestartButtons();
-            return View("PlayerGame", mpass);
+            List<UserModel> userList = new List<UserModel>();
+            List<PlayerStatModel> statList = new List<PlayerStatModel>();
+            List<MultiplePassModel> passList = new List<MultiplePassModel>();
+
+            userList = user.GetUserName().ToList();
+            statList = user.GetData().ToList();
+
+
+            for (int i = 0; i < userList.Count; i++)
+            {
+                passList.Add(new MultiplePassModel { 
+                    UserModel = userList[i],
+                    PlayerStat = statList[i]
+                });
+            }
+
+            return View("CheckAllScores", passList);
         }
 
         public ActionResult LogoutReset()
@@ -96,8 +105,10 @@ namespace YangWeb.Controllers
             mpass.AllAB = allActionButtons;
             mpass.PlayerStat = newPlayer;
 
-            System.Diagnostics.Debug.WriteLine(CheckIfAllButtonsAreUsed());
-            return View("PlayerGame",mpass);
+            if (!CheckIfAllButtonsAreUsed())
+                return View("PlayerGame", mpass);
+            else
+                return View("EndPage", "Game Over");
         }
 
         int addNUm;
@@ -107,10 +118,10 @@ namespace YangWeb.Controllers
             for (int i = 0; i < allActionButtons.Count; i++)
             {
                 if (allActionButtons[i].ButtonState)
-                    addNUm += i;
+                    addNUm += (i-(i-1));
             }
             System.Diagnostics.Debug.WriteLine(addNUm);
-            return addNUm == 19 ? true : false;
+            return addNUm == 20 ? true : false;
             
         }
 

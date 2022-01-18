@@ -1,0 +1,32 @@
+﻿@model IEnumerable<YangWeb.Models.MultiplePassModel>
+
+<p>
+    <h1>All Scores</h1>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.UserModel.Username)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PlayerStat.Score)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserModel.Username)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PlayerStat.Score)
+            </td>
+            
+        </tr>
+}   
+    </tbody>
+
+</table>

@@ -28,13 +28,51 @@ namespace YangWeb.Services
             conn.Close();
         }
 
-        public void GetData(string username)
+        public List<PlayerStatModel> GetData()
         {
+            List<PlayerStatModel> newList = new List<PlayerStatModel>();
             conn.Open();
-            MySqlCommand comm = new MySqlCommand("select * from usermodel");
-            comm.ExecuteNonQuery();
+            MySqlCommand comm = new MySqlCommand("select * from usermodel",conn);
+            MySqlDataReader reader = comm.ExecuteReader();
+            if (reader.HasRows)
+            {
+                while (reader.Read())
+                {
+                    newList.Add(new PlayerStatModel
+                    {
+                        Score = Convert.ToInt32(reader[4])
+                    }); 
+                }
+            }
+            else
+                System.Diagnostics.Debug.WriteLine("No rows founds");
             comm.Dispose();
             conn.Close();
+            return newList;
+        }
+
+        public List<UserModel> GetUserName()
+        {
+            List<UserModel> userList = new List<UserModel>();
+            conn.Open();
+            MySqlCommand comm = new MySqlCommand("select * from usermodel", conn);
+            MySqlDataReader reader = comm.ExecuteReader();
+            if (reader.HasRows)
+            {
+                while (reader.Read())
+                {
+                    userList.Add(new UserModel
+                    {
+                        Username = Convert.ToString(reader[1])
+                    }); 
+                }
+            }
+            else
+                System.Diagnostics.Debug.WriteLine("No rows founds");
+            comm.Dispose();
+            conn.Close();
+
+            return userList;
         }
 
         public PlayerStatModel GetPlayerStats()
