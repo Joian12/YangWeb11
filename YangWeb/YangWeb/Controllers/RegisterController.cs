@@ -18,8 +18,13 @@ namespace YangWeb.Controllers
         public IActionResult ProcessRegistration(UserModel user)
         {
             UserDataService userData = new UserDataService();
-            userData.RegisterUser(user);
-            return RedirectToAction("Login", "Login");
+            if(!userData.CheckLogin(user))
+            {
+                userData.RegisterUser(user);
+                return RedirectToAction("Login", "Login");
+            }
+            else
+                return View("Index");
         }
     }
 }

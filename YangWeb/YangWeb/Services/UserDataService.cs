@@ -120,6 +120,9 @@ namespace YangWeb.Services
             return isValid;
         }
 
-    
+        public bool DoesUserExist(UserModel user)
+        {
+            return true;
+        }
     }
 }
