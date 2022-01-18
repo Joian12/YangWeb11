@@ -61,7 +61,6 @@ namespace YangWeb.Services
 
         public void SetPlayerStats(PlayerStatModel player)
         {
-            System.Diagnostics.Debug.WriteLine("Saved");
             conn.Open();
             MySqlCommand command = new MySqlCommand("update usermodel set Health = '" + player.Health + "', Score = '"+player.Score+ "' where Username = '" + UserSession.GetUserSession() + "'; ", conn);
 

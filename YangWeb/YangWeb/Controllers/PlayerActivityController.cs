@@ -50,7 +50,15 @@ namespace YangWeb.Controllers
 
         public IActionResult ResetButton()
         {
-            return View("PlayerGame");
+            PlayerStatModel newPlayer = new PlayerStatModel();
+            MultiplePassModel mpass = new MultiplePassModel();
+            UserDataService user = new UserDataService();
+         
+            newPlayer.Score = user.GetPlayerStats().Score;
+            mpass.AllAB = RestartButtons();
+            mpass.PlayerStat = newPlayer;
+            RestartButtons();
+            return View("PlayerGame", mpass);
         }
 
         public ActionResult LogoutReset()
@@ -92,24 +100,27 @@ namespace YangWeb.Controllers
             return View("PlayerGame",mpass);
         }
 
+        int addNUm;
        
         public bool CheckIfAllButtonsAreUsed()
         {
-            int num = 0;
             for (int i = 0; i < allActionButtons.Count; i++)
             {
                 if (allActionButtons[i].ButtonState)
-                    num += i;
+                    addNUm += i;
             }
-            return num == 15 ? true : false;
+            System.Diagnostics.Debug.WriteLine(addNUm);
+            return addNUm == 19 ? true : false;
+            
         }
 
-        public void RestartButtons()
+        public List<ActionButtonModel> RestartButtons()
         {
             for (int i = 0; i < allActionButtons.Count; i++)
             {
                 allActionButtons[i].ButtonState = false;
             }
+            return allActionButtons;
         }
     }
 }

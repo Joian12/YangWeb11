@@ -278,4 +278,3 @@ C:\Users\chris\Documents\GitHub\YangWeb\YangWeb\YangWeb\obj\Debug\net5.0\YangWeb
 C:\Users\chris\Documents\GitHub\YangWeb\YangWeb\YangWeb\obj\Debug\net5.0\YangWeb.genruntimeconfig.cache
 C:\Users\chris\Documents\GitHub\YangWeb\YangWeb\YangWeb\obj\Debug\net5.0\Razor\Views\PlayerActivity\PlayerGame.cshtml.g.cs
 C:\Users\chris\Documents\GitHub\YangWeb\YangWeb\YangWeb\obj\Debug\net5.0\Razor\Views\PlayerActivity\EndPage.cshtml.g.cs
-C:\Users\chris\Documents\GitHub\YangWeb\YangWeb\YangWeb\obj\Debug\net5.0\Razor\Views\CreateEnemy\CreateEnemy.cshtml.g.cs
