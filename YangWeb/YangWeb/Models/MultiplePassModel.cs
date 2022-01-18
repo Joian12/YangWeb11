@@ -9,6 +9,5 @@ namespace YangWeb.Models
     {   
         public List<ActionButtonModel> AllAB { get; set; }
         public PlayerStatModel PlayerStat { get; set; }
-        public EnemyStatsModel EnemyStats { get; set; }
     }
 }

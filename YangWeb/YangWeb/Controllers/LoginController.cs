@@ -26,7 +26,6 @@ namespace YangWeb.Controllers
             }
             else
                 return View("Index");
-            
         }
     }
 }

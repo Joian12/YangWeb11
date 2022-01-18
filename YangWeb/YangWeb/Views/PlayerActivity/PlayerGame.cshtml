@@ -8,47 +8,12 @@
         <hr />
         <dl>
             <dt >
-                @Html.DisplayNameFor(model => model.PlayerStat.Level)
-            </dt>
-            <dd >
-                @Html.DisplayFor(model => model.PlayerStat.Level)
-            </dd>
-            <dt >
-                @Html.DisplayNameFor(model => model.PlayerStat.CurrentExperience)
-            </dt>
-            <dd >
-                @Html.DisplayFor(model => model.PlayerStat.CurrentExperience)
-            </dd>
-            <dt >
-                @Html.DisplayNameFor(model => model.PlayerStat.MaxExperience)
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.PlayerStat.MaxExperience)
-            </dd>
-            <dt>
-                @Html.DisplayNameFor(model => model.PlayerStat.Health)
-            </dt>
-            <dd >
-                @Html.DisplayFor(model => model.PlayerStat.Health)
-            </dd>
-            <dt >
                 @Html.DisplayNameFor(model => model.PlayerStat.Score)
             </dt>
             <dd>
                 @Html.DisplayFor(model => model.PlayerStat.Score)
             </dd>
-            <dt >
-                @Html.DisplayNameFor(model => model.PlayerStat.Score)
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.PlayerStat.Score)
-            </dd>
-            <dt >
-                @Html.DisplayNameFor(model => model.PlayerStat.Damage)
-            </dt>
-            <dd >
-                @Html.DisplayFor(model => model.PlayerStat.Damage)
-            </dd>
+      
         </dl>
     </div>
 
@@ -72,31 +37,16 @@
             </div>
         </form>
     </div>
-    <div class="col-md-2">
-        <h4>Enemy</h4>
-
-        <hr />
-        <dl>
-            <dt>
-                @Html.DisplayNameFor(model => model.EnemyStats.EnemyName)
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.EnemyStats.EnemyName)
-            </dd>
-            <dt>
-                @Html.DisplayNameFor(model => model.EnemyStats.Health)
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.EnemyStats.Health)
-            </dd>
-            <dt>
-                @Html.DisplayNameFor(model => model.EnemyStats.Damage)
-            </dt>
-            <dt>
-                @Html.DisplayFor(model => model.EnemyStats.Damage)
-            </dt>
-        </dl>
-    </div>
+    <form>
+        <div>
+          
+                <button type="submit"  asp-controller="PlayerActivity" asp-action="PlayerGame">
+                   
+                    <h5>Restart Game?</h5>
+                </button>
+       
+        </div>
+    </form>
 </div>
 
 
