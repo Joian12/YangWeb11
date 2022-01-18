@@ -32,7 +32,7 @@ namespace YangWeb.Services
         {
             List<PlayerStatModel> newList = new List<PlayerStatModel>();
             conn.Open();
-            MySqlCommand comm = new MySqlCommand("select * from usermodel",conn);
+            MySqlCommand comm = new MySqlCommand("select * from usermodel order by Score desc",conn);
             MySqlDataReader reader = comm.ExecuteReader();
             if (reader.HasRows)
             {
@@ -55,7 +55,7 @@ namespace YangWeb.Services
         {
             List<UserModel> userList = new List<UserModel>();
             conn.Open();
-            MySqlCommand comm = new MySqlCommand("select * from usermodel", conn);
+            MySqlCommand comm = new MySqlCommand("select * from usermodel order by Score desc", conn);
             MySqlDataReader reader = comm.ExecuteReader();
             if (reader.HasRows)
             {
