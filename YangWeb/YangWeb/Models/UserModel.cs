@@ -11,7 +11,6 @@ namespace YangWeb.Models
 
         public int ID { get; set; }
 
-        [StringLength(10, MinimumLength = 5)]
         [DataType(DataType.Text)]
         [Required]
         public string Username { get; set; }
